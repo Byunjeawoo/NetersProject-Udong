@@ -2,7 +2,9 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView } from 'react-native';
 import {Feather} from "@expo/vector-icons";
-function CollectScreen(){
+
+
+function CollectScreen(navigation){
     return (
     <View>
         <View style={styles.SearchBar}>
@@ -12,7 +14,7 @@ function CollectScreen(){
         <SafeAreaView style={styles.Rectangle7}>
         <ScrollView>
             <View style={styles.Rectangle7_1}>
-            <TouchableOpacity style={styles.Rectangle8} onPress={() => alert("NETers")}>
+            <TouchableOpacity style={styles.Rectangle8} onPress={() => navigation.navigate('DetailClub')}>
                 <View style={styles.imgNeTers}></View>
                 <View style={styles.RectangleBoxNeTers}>
                 <Text>NETers</Text>
