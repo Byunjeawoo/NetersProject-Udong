@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {IconSearch, IconPlus, IconAlert} from './svg';
 
 
 function HomeScreen({navigation}){
@@ -11,17 +12,20 @@ function HomeScreen({navigation}){
             <View style={styles.RectangleMain}>
             </View>
             <View style={styles.NavBar}>
-                <TouchableOpacity style={styles.NavBarHome} > 
-                    <Text>홈</Text> 
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}> 
+                    <IconSearch/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarCollect} onPress={() => navigation.navigate('Collect')}>
-                    <Text>모집공고</Text>
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Collect')}>
+                    <IconSearch/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarCommunity}>
-                    <Text>커뮤니티</Text>
+                <TouchableOpacity style={styles.NavBarElement}>
+                    <IconSearch/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarProfile}>
-                    <Text>프로필</Text>
+                <TouchableOpacity style={styles.NavBarElement}>
+                    <IconAlert/>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.NavBarElement}>
+                    <IconPlus/>
                 </TouchableOpacity>
             </View>
         </View>
@@ -54,40 +58,16 @@ const styles = {
     },
     NavBar:{
         flexDirection: "row",
-        flex:1,
+        flex:0.8,
         backgroundColor:"white",
     },
-    NavBarHome:{
+    NavBarElement:{
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
         flex:1,
-        borderWidth: 0.5,
-        borderColor:'gray',
-    },
-    NavBarCollect:{
-        position: 'relative',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex:1,
-        borderWidth: 0.5,
-        borderColor:'gray',
-    },
-    NavBarCommunity:{
-        position: 'relative',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex:1,
-        borderWidth: 0.5,
-        borderColor:'gray',
-    },
-    NavBarProfile:{
-        position: 'relative',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex:1,
-        borderWidth: 0.5,
-        borderColor:'gray',
+        borderTopWidth:1,
+        borderColor:'#B9B6B6',
     },
 }
 export default HomeScreen;

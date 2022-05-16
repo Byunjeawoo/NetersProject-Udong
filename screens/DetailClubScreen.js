@@ -3,6 +3,7 @@ import { Button, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { normalizeRect } from 'react-native/Libraries/StyleSheet/Rect';
 import Svg, {Path} from "react-native-svg";
 import IconBookmark,{IconCallender} from "./svg";
+import { Touchable } from 'react-native-web';
 
 function DetailClubScreen({ navigation }) {
     return (
@@ -41,9 +42,9 @@ function DetailClubScreen({ navigation }) {
                         <Text>6:4</Text>
                     </View>
                 </View>
-                <View style={styles.btnAccess}>
+                <TouchableOpacity style={styles.btnAccess}>
                     <Text style={{color:'white', fontSize:20}}>지원하기</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
