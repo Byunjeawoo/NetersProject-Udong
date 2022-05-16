@@ -4,7 +4,7 @@ import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaV
 import {Feather} from "@expo/vector-icons";
 
 
-function CollectScreen(navigation){
+function CollectScreen({navigation}){
     return (
     <View>
         <View style={styles.SearchBar}>
