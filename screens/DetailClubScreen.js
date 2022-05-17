@@ -2,8 +2,11 @@ import React from 'react';
 import { Button, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { normalizeRect } from 'react-native/Libraries/StyleSheet/Rect';
 import Svg, {Path} from "react-native-svg";
-import IconBookmark,{IconCallender} from "./svg";
-import { Touchable } from 'react-native-web';
+import IconBookmark,{IconCallender} from "../util/svg";
+import {verticalScale, horizontalScale, moderateScale} from '../util/scailling'; 
+//verticalScale : 세로 길이에만 영향을 주는 값
+//horizontalScale : 가로 길이에만 영향을 주는 값
+//moderateScale : 글자 크기나, 여튼 대각선으로 가로세로 동일한 비율로 변화하는 값
 
 function DetailClubScreen({ navigation }) {
     return (
@@ -15,7 +18,7 @@ function DetailClubScreen({ navigation }) {
             <View style={styles.impormationBar}>
                 <View style={{flex:1, flexDirection:"row"}}>
                     <Text style={styles.textClubName}>Neters</Text>
-                    <TouchableOpacity style={{marginTop:20, marginLeft:200, height:41}}>
+                    <TouchableOpacity style={{marginTop:verticalScale(20), marginLeft:horizontalScale(180)}}>
                         <IconBookmark />
                     </TouchableOpacity>
                 </View>
@@ -69,16 +72,16 @@ const styles = {
         justifyContent: 'center',
     },
     textHash:{
-        fontSize:18,
+        fontSize:moderateScale(18),
     },
     impormationBar: {
         flex: 3,
         backgroundColor: "white",
     },
     textClubName:{
-        fontSize:35,
-        marginLeft:30,
-        marginTop:17,
+        fontSize:moderateScale(35),
+        marginLeft:horizontalScale(30),
+        marginTop:verticalScale(17),
         color:'#522F9D',
         fontWeight:'600',
     },
@@ -88,18 +91,18 @@ const styles = {
         justifyContent: 'center',
     },
     textClubInfo:{
-        marginLeft:30,
-        fontSize:15,
+        marginLeft:horizontalScale(30),
+        fontSize:moderateScale(15),
     },
     Iconset:{
         flex:1,
         alignItems: 'center',
     },
     btnAccess: {
-        marginLeft: 22.3,
-        marginBottom: 15,
+        marginLeft: horizontalScale(22.3),
+        marginBottom: verticalScale(15),
         flex: 0.5,
-        width:340,
+        width:horizontalScale(340),
         backgroundColor: '#A890EB',
         alignItems: 'center',
         justifyContent: 'center',
