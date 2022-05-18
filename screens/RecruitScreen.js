@@ -5,10 +5,13 @@ import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaV
 import {Feather} from "@expo/vector-icons";
 import {IconSearch, IconPlus, IconAlert} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
+import {Picker} from '@react-native-picker/picker';
+
 const { width, height } = Dimensions.get('window');
 
 function RecruitScreen({navigation}){
     const [dataSource, setDataSource] = useState([]);
+    const [selectedLanguage, setSelectedLanguage] = useState();
     useEffect(() => {
     let items = Array.apply(null, Array(60)).map((v, i) => {
         return {
@@ -20,6 +23,7 @@ function RecruitScreen({navigation}){
     //console.log(items);
     }, []);
 
+
     return(
         <View style={{flex:1, backgroundColor:'white'}}>
             <View style={{flex:0.13, backgroundColor:"white"}}>
@@ -27,7 +31,29 @@ function RecruitScreen({navigation}){
             </View>
             <View style={{flex:0.07, backgroundColor:"white", flexDirection:'row',marginLeft:horizontalScale(17.5), width:width-horizontalScale(35)}}>
                 <View style={{flex:5}}></View>
-                <View style={{flex:5,backgroundColor:'#E5E5E5'}}>
+                <View style={{flex:3.5,backgroundColor:'#E5E5E5'}}>
+                    <Picker
+                        style={{backgroundColor:'skyblue', marginLeft:horizontalScale(3), marginTop:verticalScale(3)}}
+                        selectedValue={selectedLanguage}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }>
+                        <Picker.Item label="모두" value="all" />
+                        <Picker.Item label="학술" value="study" />
+                        <Picker.Item label="봉사" value="help" />
+                    </Picker>
+                </View>
+                <View style={{flex:4.2,backgroundColor:'#E5E5E5'}}>
+                <Picker
+                        style={{backgroundColor:'skyblue', marginLeft:horizontalScale(3), marginTop:verticalScale(3), marginRight: horizontalScale(2)}}
+                        selectedValue={selectedLanguage}
+                        onValueChange={(itemValue) =>
+                            setSelectedLanguage(itemValue)
+                        }>
+                        <Picker.Item label="등록순" value="signSort" />
+                        <Picker.Item label="마감일순" value="deadlineSort" />
+                        <Picker.Item label="이름순" value="nameSort" />
+                    </Picker>
                 </View>
             </View>
             <View style={{flex:0.73, backgroundColor:"white"}}>
@@ -78,12 +104,12 @@ function RecruitScreen({navigation}){
 const styles = StyleSheet.create({
     TextProject:{
         position: 'absolute',
-        left: horizontalScale(50),
+        left: horizontalScale(40),
         top: verticalScale(75),
         /*font-family: 'Ligconsolata',*/
         fontStyle: 'normal',
         fontWeight: '700',
-        fontSize: 30,
+        fontSize: moderateScale(30),
         lineHeight: 31,
         color: '#5E37AF',
     },
