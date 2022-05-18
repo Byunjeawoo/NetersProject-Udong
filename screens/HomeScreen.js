@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {IconSearch, IconPlus, IconAlert} from '../util/svg';
-
+import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 
 function HomeScreen({navigation}){
     return (
         <View style={{flex:1}}>
             <View style={styles.SearchBar}>
-                <Text style={styles.TextProject}>PROJECT</Text>
+                <Text style={styles.TextProject}>UDong</Text>
             </View>
             <View style={styles.RectangleMain}>
             </View>
@@ -40,16 +40,16 @@ const styles = {
         backgroundColor:"black",
     },
     TextProject:{
-        width:1500,
+        width:horizontalScale(1500),
         position: 'absolute',
-        height: 31,
-        left: 42,
-        top: 49,
+        height: verticalScale(31),
+        left: horizontalScale(42),
+        top: verticalScale(49),
         /*font-family: 'Ligconsolata',*/
         fontStyle: 'normal',
         fontWeight: '700',
-        fontSize: 30,
-        lineHeight: 31,
+        fontSize: moderateScale(30),
+        lineHeight: verticalScale(31),
         color: '#3163AE',
     },
     RectangleMain:{

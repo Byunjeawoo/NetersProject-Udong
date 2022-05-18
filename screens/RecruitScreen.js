@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
 import {Feather} from "@expo/vector-icons";
 import {IconSearch, IconPlus, IconAlert} from '../util/svg';
-import { horizontalScale, verticalScale } from '../util/scailling';
+import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 const { width, height } = Dimensions.get('window');
 
 function RecruitScreen({navigation}){
@@ -21,25 +21,29 @@ function RecruitScreen({navigation}){
     }, []);
 
     return(
-        <View style={{flex:1}}>
-            <View style={{flex:0.13, backgroundColor:"blue"}}></View>
-            <View style={{flex:0.07, backgroundColor:"gray"}}></View>
-            <View style={{flex:0.73, backgroundColor:"skyblue"}}>
+        <View style={{flex:1, backgroundColor:'white'}}>
+            <View style={{flex:0.13, backgroundColor:"white"}}>
+            <Text style={styles.TextProject}>모집공고</Text>
+            </View>
+            <View style={{flex:0.07, backgroundColor:"white", flexDirection:'row',marginLeft:horizontalScale(17.5), width:width-horizontalScale(35)}}>
+                <View style={{flex:5}}></View>
+                <View style={{flex:5,backgroundColor:'#E5E5E5'}}>
+                </View>
+            </View>
+            <View style={{flex:0.73, backgroundColor:"white"}}>
                 <View></View>
                 <SafeAreaView style={styles.container}>
                     <FlatList
                         key={'#'}
                         data={dataSource}
                         renderItem={({item}) => (
-                            <View style={styles.Rectangle7_1}>
-                            <TouchableOpacity style={styles.Rectangle8} onPress={() => navigation.navigate('DetailClub')}>
+                            <TouchableOpacity style={styles.itemList} onPress={() => navigation.navigate('DetailClub')}>
                                 <View style={styles.imgNeTers}></View>
                                 <View style={styles.RectangleBoxNeTers}>
                                 <Text style={styles.ClubName}>NETers</Text>
                                 <Text style={styles.miniHash}>#프로그래밍  #친목</Text>
                                 </View>
                             </TouchableOpacity>
-                        </View>
                         )}
                         //Setting the number of column
                         numColumns={2}
@@ -47,7 +51,7 @@ function RecruitScreen({navigation}){
                     />
                     </SafeAreaView>
                 </View>
-            <View style={{flex:0.07, backgroundColor:"orange"}}>
+            <View style={{flex:0.07, backgroundColor:"#E5E5E5"}}>
             <View style={styles.NavBar}>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}> 
                     <IconSearch/>
@@ -66,21 +70,31 @@ function RecruitScreen({navigation}){
                 </TouchableOpacity>
             </View>
             </View>
-
         </View>
     );
 }
 
 
 const styles = StyleSheet.create({
+    TextProject:{
+        position: 'absolute',
+        left: horizontalScale(50),
+        top: verticalScale(75),
+        /*font-family: 'Ligconsolata',*/
+        fontStyle: 'normal',
+        fontWeight: '700',
+        fontSize: 30,
+        lineHeight: 31,
+        color: '#5E37AF',
+    },
     list:{
         flex: 1,
         width:"100%",
         backgroundColor:"#f2f2f2",
     },
     item:{
-        width:100,
-        height:100,
+        width:horizontalScale(100),
+        height:verticalScale(100),
         backgroundColor:"red",
     },
     stylegridView:{
@@ -92,25 +106,26 @@ const styles = StyleSheet.create({
         paddingBottom:80,
     },
     container: {
-        marginLeft:horizontalScale(12),
-        width: width - horizontalScale(12)*2,
+        marginLeft:horizontalScale(17),
+        width: width - horizontalScale(17)*2,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#E5E5E5',
     },
     imageThumbnail: {
         justifyContent: 'center',
         alignItems: 'center',
         height: verticalScale(100),
     },
-    Rectangle8: {
+    itemList: {
         position: 'relative',
-        height: 233,
-        width: 173,
-        left: 6,
-        top: 4,
+        height: verticalScale(233),
+        width: horizontalScale(173),
+        left: horizontalScale(2),
+        top: verticalScale(2),
+        bottom:2,
         backgroundColor: "white",
-        borderWidth: 3,
+        borderWidth: 1,
         borderColor:'#E5E5E5', //테두리 색
     },
     imgNeTers:{
@@ -118,14 +133,14 @@ const styles = StyleSheet.create({
         flex:7,
     },
     ClubName:{
-        fontSize:20,
-        marginLeft:10,
-        marginTop:5,
+        fontSize:moderateScale(20),
+        marginLeft:horizontalScale(10),
+        marginTop:verticalScale(5),
     },
     miniHash:{
-        fontSize:12,
-        marginTop:14,
-        marginLeft:10,
+        fontSize:moderateScale(12),
+        marginTop:verticalScale(14),
+        marginLeft:horizontalScale(10),
     },
     RectangleBoxNeTers:{
         flex:3,
