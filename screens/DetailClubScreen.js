@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { normalizeRect } from 'react-native/Libraries/StyleSheet/Rect';
 import Svg, {Path} from "react-native-svg";
 import IconBookmark,{IconCallender, IconChat, IconSexFlex, IconUser} from "../util/svg";
 import {verticalScale, horizontalScale, moderateScale} from '../util/scailling'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //verticalScale : 세로 길이에만 영향을 주는 값
 //horizontalScale : 가로 길이에만 영향을 주는 값
 //moderateScale : 글자 크기나, 여튼 대각선으로 가로세로 동일한 비율로 변화하는 값
 
 function DetailClubScreen({ navigation }) {
+    const [ClubSave, setClubSave] = useState(false)
+    const storeData = () => {
+        try {
+            if(ClubSave===false){
+                setClubSave(true)
+            }else{
+                setClubSave(false)
+            }
+        } catch (e) {
+          // saving error
+        }
+    }
     return (
         <View style={{ flex: 1 }}>
             <SafeAreaView style={{ flex: 1 }}>
@@ -20,8 +33,8 @@ function DetailClubScreen({ navigation }) {
                     <View style={styles.impormationBar}>
                         <View style={{flex:1, flexDirection:"row"}}>
                             <Text style={styles.textClubName}>Neters</Text>
-                            <TouchableOpacity style={{marginTop:verticalScale(20), marginLeft:horizontalScale(180)}}>
-                                <IconBookmark />
+                            <TouchableOpacity style={{marginTop:verticalScale(20), marginLeft:horizontalScale(180)}} onPress={() => storeData()}>
+                                {ClubSave===true ? <IconBookmark color="#FFDB1E"/> : <IconBookmark color="#ecf0f1"/>}
                             </TouchableOpacity>
                         </View>
                         <View style={{flex:1}}>

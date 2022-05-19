@@ -2,21 +2,6 @@ import React from 'react';
 import Svg, { Path } from "react-native-svg"
 // 모듈 불러오기
 
-export default function IconBookmark() {
-  return (
-    <Svg
-    width={32}
-    height={40}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <Path
-      d="M0 3.482V40l16.001-10.433L32 40V3.482c-.014-.927-.563-1.812-1.528-2.464C29.507.366 28.203 0 26.845 0l-.188.002h.01-21.33L5.156 0C3.8 0 2.497.365 1.53 1.017.565 1.67.016 2.554.002 3.48v.002H0Z"
-      fill="#FFDB1E"
-    />
-  </Svg>
-  );
-}
 
 export function IconCallender() {
     return (
@@ -99,7 +84,7 @@ export function IconGlass(){
     </Svg>
   );
 }
-
+//아래부터는 상세 페이지 아이콘들
 export function IconUser(){
   return(
     <Svg
@@ -182,6 +167,21 @@ export function IconSexFlex(){
       d="M33.291 7.547a.924.924 0 0 1-.663-.292.97.97 0 0 1-.268-.689l.047-3.848-3.752.048a.932.932 0 0 1-.671-.274.982.982 0 0 1-.017-1.37.933.933 0 0 1 .663-.292l5.69-.074-.072 5.834a.988.988 0 0 1-.285.682.941.941 0 0 1-.672.275Z"
       fill="#000"
     />
+  </Svg>
+  );
+}
+
+export default function IconBookmark({color}) {
+  return (
+    <Svg
+    width={32}
+    height={40}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <Path
+      d="M0 3.482V40l16.001-10.433L32 40V3.482c-.014-.927-.563-1.812-1.528-2.464C29.507.366 28.203 0 26.845 0l-.188.002h.01-21.33L5.156 0C3.8 0 2.497.365 1.53 1.017.565 1.67.016 2.554.002 3.48v.002H0Z"
+      fill={color}/>
   </Svg>
   );
 }
