@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {IconSearch, IconPlus, IconAlert} from '../util/svg';
+import {IconSearch, IconPlus, IconAlert, IconGlass} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 
 function HomeScreen({navigation}){
@@ -13,7 +13,7 @@ function HomeScreen({navigation}){
             </View>
             <View style={styles.NavBar}>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}> 
-                    <IconSearch/>
+                    <IconGlass/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
                     <IconSearch/>

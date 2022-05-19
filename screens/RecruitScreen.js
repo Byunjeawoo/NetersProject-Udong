@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
 import {Feather} from "@expo/vector-icons";
-import {IconSearch, IconPlus, IconAlert} from '../util/svg';
+import {IconSearch, IconPlus, IconAlert, IconGlass} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 import {Picker} from '@react-native-picker/picker';
 
@@ -33,7 +33,7 @@ function RecruitScreen({navigation}){
                 <View style={{flex:5}}></View>
                 <View style={{flex:3.5,backgroundColor:'#E5E5E5'}}>
                     <Picker
-                        style={{backgroundColor:'skyblue', marginLeft:horizontalScale(3), marginTop:verticalScale(3)}}
+                        style={{backgroundColor:'white', marginLeft:horizontalScale(3), marginTop:verticalScale(3)}}
                         selectedValue={selectedLanguage}
                         onValueChange={(itemValue) =>
                             setSelectedLanguage(itemValue)
@@ -45,7 +45,7 @@ function RecruitScreen({navigation}){
                 </View>
                 <View style={{flex:4.2,backgroundColor:'#E5E5E5'}}>
                 <Picker
-                        style={{backgroundColor:'skyblue', marginLeft:horizontalScale(3), marginTop:verticalScale(3), marginRight: horizontalScale(2)}}
+                        style={{backgroundColor:'white', marginLeft:horizontalScale(3), marginTop:verticalScale(3), marginRight: horizontalScale(2)}}
                         selectedValue={selectedLanguage}
                         onValueChange={(itemValue) =>
                             setSelectedLanguage(itemValue)
@@ -80,7 +80,7 @@ function RecruitScreen({navigation}){
             <View style={{flex:0.07, backgroundColor:"#E5E5E5"}}>
             <View style={styles.NavBar}>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}> 
-                    <IconSearch/>
+                    <IconGlass/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
                     <IconSearch/>
