@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
 import {Feather} from "@expo/vector-icons";
-import {IconSearch, IconPlus, IconAlert, IconGlass} from '../util/svg';
+import {IconSearch, IconPlus, IconAlert, IconGlass, IconHome, IconMiniPeopleClub} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 import {Picker} from '@react-native-picker/picker';
 
@@ -26,14 +26,14 @@ function RecruitScreen({navigation}){
 
     return(
         <View style={{flex:1, backgroundColor:'white'}}>
-            <View style={{flex:0.13, backgroundColor:"white"}}>
+            <View style={{flex:0.13, backgroundColor:"white", zIndex:6}}>
             <Text style={styles.TextProject}>모집공고</Text>
             </View>
-            <View style={{flex:0.07, backgroundColor:"white", flexDirection:'row',marginLeft:horizontalScale(17.5), width:width-horizontalScale(35)}}>
+            <View style={{flex:0.07, backgroundColor:"white", flexDirection:'row',marginLeft:width*0.051, width:width*0.905}}>
                 <View style={{flex:5}}></View>
                 <View style={{flex:3.5,backgroundColor:'#E5E5E5'}}>
                     <Picker
-                        style={{backgroundColor:'white', marginLeft:horizontalScale(3), marginTop:verticalScale(3)}}
+                        style={{backgroundColor:'white', marginLeft:width*0.007, marginTop:height*0.004}}
                         selectedValue={selectedLanguage}
                         onValueChange={(itemValue) =>
                             setSelectedLanguage(itemValue)
@@ -45,7 +45,7 @@ function RecruitScreen({navigation}){
                 </View>
                 <View style={{flex:4.2,backgroundColor:'#E5E5E5'}}>
                 <Picker
-                        style={{backgroundColor:'white', marginLeft:horizontalScale(3), marginTop:verticalScale(3), marginRight: horizontalScale(2)}}
+                        style={{backgroundColor:'white', marginLeft:width*0.007, marginTop:height*0.004, marginRight: width*0.007}}
                         selectedValue={selectedLanguage}
                         onValueChange={(itemValue) =>
                             setSelectedLanguage(itemValue)
@@ -79,14 +79,14 @@ function RecruitScreen({navigation}){
                 </View>
             <View style={{flex:0.07, backgroundColor:"#E5E5E5"}}>
             <View style={styles.NavBar}>
-                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}> 
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Search')}> 
                     <IconGlass/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
+                <TouchableOpacity style={styles.NavBarElementChecked} onPress={() => navigation.navigate('Recruit')}>
                     <IconSearch/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarElement}>
-                    <IconSearch/>
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}>
+                    <IconHome/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
                     <IconAlert/>
@@ -104,24 +104,18 @@ function RecruitScreen({navigation}){
 const styles = StyleSheet.create({
     TextProject:{
         position: 'absolute',
-        left: horizontalScale(40),
-        top: verticalScale(75),
+        left: width*0.08,
+        top: height*0.095,
         /*font-family: 'Ligconsolata',*/
         fontStyle: 'normal',
         fontWeight: '700',
         fontSize: moderateScale(30),
-        lineHeight: 31,
         color: '#5E37AF',
     },
     list:{
         flex: 1,
         width:"100%",
         backgroundColor:"#f2f2f2",
-    },
-    item:{
-        width:horizontalScale(100),
-        height:verticalScale(100),
-        backgroundColor:"red",
     },
     stylegridView:{
         flexDirection:"row",
@@ -132,21 +126,16 @@ const styles = StyleSheet.create({
         paddingBottom:80,
     },
     container: {
-        marginLeft:horizontalScale(17),
-        width: width - horizontalScale(17)*2,
+        marginLeft:width*0.04,
+        width: width*0.92,
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#E5E5E5',
     },
-    imageThumbnail: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: verticalScale(100),
-    },
     itemList: {
         position: 'relative',
-        height: verticalScale(233),
-        width: horizontalScale(173),
+        height: height*0.3,
+        width: width*0.455,
         left: horizontalScale(2),
         top: verticalScale(2),
         bottom:2,
@@ -160,13 +149,13 @@ const styles = StyleSheet.create({
     },
     ClubName:{
         fontSize:moderateScale(20),
-        marginLeft:horizontalScale(10),
-        marginTop:verticalScale(5),
+        marginLeft:width*0.03,
+        marginTop:height*0.005,
     },
     miniHash:{
         fontSize:moderateScale(12),
-        marginTop:verticalScale(14),
-        marginLeft:horizontalScale(10),
+        marginTop:height*0.015,
+        marginLeft:width*0.03,
     },
     RectangleBoxNeTers:{
         flex:3,
@@ -184,6 +173,15 @@ const styles = StyleSheet.create({
         borderTopWidth:1,
         borderColor:'#B9B6B6',
     },
+    NavBarElementChecked:{
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex:1,
+        borderTopWidth:1,
+        borderColor:'#B9B6B6',
+        backgroundColor:'#F1F1F1',
+    }
 });
 
 export default RecruitScreen;

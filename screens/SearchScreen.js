@@ -1,24 +1,34 @@
-import React from 'react';
-import {Button, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {Button, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, ScrollView} from 'react-native';
 import {IconSearch, IconPlus, IconAlert, IconGlass, IconHome} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
+import { SearchBar } from 'react-native-screens';
+const { width, height } = Dimensions.get('window');
 
-function HomeScreen({navigation}){
+function SearchScreen({navigation}){
+    const [text, setText] = useState("");
     return (
         <View style={{flex:1}}>
-            <View style={styles.SearchBar}>
-                <Text style={styles.TextProject}>UDong</Text>
+        <ScrollView scrollEnabled={false}>
+            <View style={{flex:2, alignItems:'center'}}>
+
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={setText}
+                        value={text}
+                        placeholder="        검색어를 입력하세요."
+                    />
             </View>
-            <View style={styles.RectangleMain}>
-            </View>
+            <View></View>
+            </ScrollView>
             <View style={styles.NavBar}>
-                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Search')}> 
+                <TouchableOpacity style={styles.NavBarElementChecked} onPress={() => navigation.navigate('Search')}> 
                     <IconGlass/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
                     <IconSearch/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarElementChecked} onPress={() => navigation.navigate('Home')}>
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}>
                     <IconHome/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
@@ -33,32 +43,16 @@ function HomeScreen({navigation}){
 }
 
 const styles = {
-    SearchBar:{
-        flex:1.3,
-        flexDirection:"row",
-        top:0,
-        backgroundColor:"black",
-    },
-    TextProject:{
-        width:horizontalScale(1500),
-        position: 'absolute',
-        height: verticalScale(31),
-        left: horizontalScale(42),
-        top: verticalScale(49),
-        /*font-family: 'Ligconsolata',*/
-        fontStyle: 'normal',
-        fontWeight: '700',
-        fontSize: moderateScale(30),
-        lineHeight: verticalScale(31),
-        color: '#3163AE',
-    },
-    RectangleMain:{
-        flex:8,
-        backgroundColor:"white",
-    },
+    input: {
+        margin:1,
+        height: height*0.05,
+        width: width*0.9,
+        marginTop:height*0.1,
+        borderWidth: 1,
+      },
     NavBar:{
         flexDirection: "row",
-        flex:0.8,
+        height:height*0.085,
         backgroundColor:"white",
     },
     NavBarElement:{
@@ -79,4 +73,4 @@ const styles = {
         backgroundColor:'#F1F1F1',
     },
 }
-export default HomeScreen;
+export default SearchScreen;

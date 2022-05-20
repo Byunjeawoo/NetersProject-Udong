@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Button, View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { Button, View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, Dimensions } from 'react-native';
 import { normalizeRect } from 'react-native/Libraries/StyleSheet/Rect';
-import Svg, {Path} from "react-native-svg";
 import IconBookmark,{IconCallender, IconChat, IconSexFlex, IconUser} from "../util/svg";
 import {verticalScale, horizontalScale, moderateScale} from '../util/scailling'; 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const { width, height } = Dimensions.get('window');
 //verticalScale : 세로 길이에만 영향을 주는 값
 //horizontalScale : 가로 길이에만 영향을 주는 값
 //moderateScale : 글자 크기나, 여튼 대각선으로 가로세로 동일한 비율로 변화하는 값
@@ -22,6 +22,7 @@ function DetailClubScreen({ navigation }) {
           // saving error
         }
     }
+    //useEffect(storeData,[])
     return (
         <View style={{ flex: 1 }}>
             <SafeAreaView style={{ flex: 1 }}>
@@ -33,7 +34,7 @@ function DetailClubScreen({ navigation }) {
                     <View style={styles.impormationBar}>
                         <View style={{flex:1, flexDirection:"row"}}>
                             <Text style={styles.textClubName}>Neters</Text>
-                            <TouchableOpacity style={{marginTop:verticalScale(20), marginLeft:horizontalScale(180)}} onPress={() => storeData()}>
+                            <TouchableOpacity style={{marginTop:height*0.03, marginLeft:width*0.47}} onPress={() => storeData()}>
                                 {ClubSave===true ? <IconBookmark color="#FFDB1E"/> : <IconBookmark color="#ecf0f1"/>}
                             </TouchableOpacity>
                         </View>
@@ -73,11 +74,11 @@ function DetailClubScreen({ navigation }) {
 
 const styles = {
     imgLogo: {
-        height:verticalScale(450),
+        height:height*0.5,
         backgroundColor: 'blue',
     },
     hashBar: {
-        height:verticalScale(50),        //추후 수정
+        height:height*0.07,        //추후 수정
         backgroundColor: 'white',
         shadowColor: "#000",
         shadowOffset: {
@@ -90,17 +91,17 @@ const styles = {
         justifyContent: 'center',
     },
     textHash:{
-        marginTop:verticalScale(12),
+        marginTop:width*0.04,
         fontSize:moderateScale(18),
     },
     impormationBar: {
-        height:verticalScale(305),
+        height:height*0.43,
         backgroundColor: "white",
     },
     textClubName:{
         fontSize:moderateScale(35),
-        marginLeft:horizontalScale(30),
-        marginTop:verticalScale(17),
+        marginLeft:width*0.08,
+        marginTop:height*0.025,
         color:'#522F9D',
         fontWeight:'600',
     },
@@ -110,7 +111,7 @@ const styles = {
         justifyContent: 'center',
     },
     textClubInfo:{
-        marginLeft:horizontalScale(30),
+        marginLeft:width*0.08,
         fontSize:moderateScale(15),
     },
     Iconset:{
@@ -118,10 +119,10 @@ const styles = {
         alignItems: 'center',
     },
     btnAccess: {
-        marginLeft: horizontalScale(22.3),
-        marginBottom: verticalScale(15),
+        marginLeft: width*0.04,
+        marginBottom: height*0.02,
         flex: 0.5,
-        width:horizontalScale(340),
+        width:width*0.92,
         backgroundColor: '#A890EB',
         alignItems: 'center',
         justifyContent: 'center',
@@ -135,7 +136,7 @@ const styles = {
         elevation: 5,
     },
     boxAction:{
-        height:verticalScale(600),
+        height:height*0.5,
         backgroundColor:'white',
         shadowColor: "#000",
         shadowOffset: {
