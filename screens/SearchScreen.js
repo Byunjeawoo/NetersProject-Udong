@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, ScrollView} from 'react-native';
-import {IconSearch, IconPlus, IconAlert, IconGlass, IconHome} from '../util/svg';
+import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 import { SearchBar } from 'react-native-screens';
 const { width, height } = Dimensions.get('window');
@@ -22,20 +22,20 @@ function SearchScreen({navigation}){
             <View></View>
             </ScrollView>
             <View style={styles.NavBar}>
-                <TouchableOpacity style={styles.NavBarElementChecked} onPress={() => navigation.navigate('Search')}> 
-                    <IconGlass/>
+            <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Search')}> 
+                    <IconNavGlass color="#6B20CC"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
-                    <IconSearch/>
+                    <IconNavSearch color="#838383"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}>
-                    <IconHome/>
+                    <IconNavHome color="#838383"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
-                    <IconAlert/>
+                    <IconNavAlert color="#838383"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
-                    <IconPlus/>
+                    <IconNavProfile color="#838383"/>
                 </TouchableOpacity>
             </View>
         </View>
@@ -49,7 +49,7 @@ const styles = {
         width: width*0.9,
         marginTop:height*0.1,
         borderWidth: 1,
-      },
+    },
     NavBar:{
         flexDirection: "row",
         height:height*0.085,

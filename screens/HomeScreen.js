@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {IconSearch, IconPlus, IconAlert, IconGlass, IconHome} from '../util/svg';
+import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 
 function HomeScreen({navigation}){
@@ -13,19 +13,19 @@ function HomeScreen({navigation}){
             </View>
             <View style={styles.NavBar}>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Search')}> 
-                    <IconGlass/>
+                    <IconNavGlass color="#838383"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
-                    <IconSearch/>
+                    <IconNavSearch color="#838383"/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarElementChecked} onPress={() => navigation.navigate('Home')}>
-                    <IconHome/>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarElement}>
-                    <IconAlert/>
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}>
+                    <IconNavHome color="#6B20CC"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
-                    <IconPlus/>
+                    <IconNavAlert color="#838383"/>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.NavBarElement}>
+                    <IconNavProfile color="#838383"/>
                 </TouchableOpacity>
             </View>
         </View>

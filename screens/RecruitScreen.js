@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
 import {Feather} from "@expo/vector-icons";
-import {IconSearch, IconPlus, IconAlert, IconGlass, IconHome, IconMiniPeopleClub} from '../util/svg';
+import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome, IconMiniPeopleClub} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 import {Picker} from '@react-native-picker/picker';
 
@@ -79,20 +79,20 @@ function RecruitScreen({navigation}){
                 </View>
             <View style={{flex:0.07, backgroundColor:"#E5E5E5"}}>
             <View style={styles.NavBar}>
-                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Search')}> 
-                    <IconGlass/>
+            <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Search')}> 
+                    <IconNavGlass color="#838383"/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.NavBarElementChecked} onPress={() => navigation.navigate('Recruit')}>
-                    <IconSearch/>
+                <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Recruit')}>
+                    <IconNavSearch color="#6B20CC"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement} onPress={() => navigation.navigate('Home')}>
-                    <IconHome/>
+                    <IconNavHome color="#838383"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
-                    <IconAlert/>
+                    <IconNavAlert color="#838383"/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.NavBarElement}>
-                    <IconPlus/>
+                    <IconNavProfile color="#838383"/>
                 </TouchableOpacity>
             </View>
             </View>
