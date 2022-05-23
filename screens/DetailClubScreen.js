@@ -61,13 +61,18 @@ function DetailClubScreen({ navigation }) {
                                 <Text>6:4</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.btnAccess}>
-                            <Text style={{color:'white', fontSize:20}}>지원하기</Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={styles.boxAction}></View>
                 </ScrollView>
             </SafeAreaView>
+            <View style={{flexDirection:'row', height:height*0.1, justifyContent: 'center', backgroundColor:'white', borderTopWidth:1, borderColor:'#c8c8c8',}}>
+                <TouchableOpacity style={styles.btnQuest}>
+                    <Text style={{color:'black', fontSize:20}}>문의하기</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btnAccess}>
+                    <Text style={{color:'white', fontSize:20}}>지원하기</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -119,21 +124,27 @@ const styles = {
         alignItems: 'center',
     },
     btnAccess: {
-        marginLeft: width*0.04,
-        marginBottom: height*0.02,
-        flex: 0.5,
-        width:width*0.92,
+        marginTop:height*0.025,
+        height:height*0.05,
+        marginLeft:width*0.08,
+        width: width*0.4,
         backgroundColor: '#A890EB',
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 8,
-        },
-        shadowOpacity: 0.44,
-        shadowRadius: 10.32,
-        elevation: 5,
+        borderWidth: 1,
+        borderColor: 'white',
+        borderRadius: 10,
+    },
+    btnQuest: {
+        marginTop:height*0.025,
+        height:height*0.05,
+        width: width*0.4,
+        backgroundColor: '#F1F1F1',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'white',
+        borderRadius: 10,
     },
     boxAction:{
         height:height*0.5,

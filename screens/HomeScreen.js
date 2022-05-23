@@ -2,8 +2,10 @@ import React from 'react';
 import {Button, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
+import axios from 'axios';
 
 function HomeScreen({navigation}){
+    
     return (
         <View style={{flex:1}}>
             <View style={styles.SearchBar}>

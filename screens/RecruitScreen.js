@@ -3,16 +3,25 @@ import { Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
 import {Feather} from "@expo/vector-icons";
-import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome, IconMiniPeopleClub} from '../util/svg';
+import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome, IconDetailPeople} from '../util/svg';
 import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 import {Picker} from '@react-native-picker/picker';
-
+import axios from 'axios';
 const { width, height } = Dimensions.get('window');
+const baseUrl = 'http://34.64.87.203:8000';
+
+// Passing configuration object to axios
 
 function RecruitScreen({navigation}){
+
     const [dataSource, setDataSource] = useState([]);
     const [selectedLanguage, setSelectedLanguage] = useState();
     useEffect(() => {
+    axios.get(`${baseUrl}/clubs`).then((response) => {
+        console.log(response.data);
+        });
+
+
     let items = Array.apply(null, Array(60)).map((v, i) => {
         return {
             id: i,
@@ -66,8 +75,18 @@ function RecruitScreen({navigation}){
                             <TouchableOpacity style={styles.itemList} onPress={() => navigation.navigate('DetailClub')}>
                                 <View style={styles.imgNeTers}></View>
                                 <View style={styles.RectangleBoxNeTers}>
-                                <Text style={styles.ClubName}>NETers</Text>
-                                <Text style={styles.miniHash}>#프로그래밍  #친목</Text>
+                                    <View style= {{flexDirection:'row'}}>
+                                        <Text style={styles.ClubName}>NETers</Text>
+                                        <View style= {{marginLeft:width*0.16, marginTop:height*0.02}}>
+                                            <IconDetailPeople/>
+                                            <Text style={{fontSize:moderateScale(9), marginLeft:-1*width*0.01, color:"#3D1F7D"}}>
+                                                15/50
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View>
+                                        <Text style={styles.miniHash}>#프로그래밍  #친목</Text>
+                                    </View>
                                 </View>
                             </TouchableOpacity>
                         )}
@@ -154,7 +173,6 @@ const styles = StyleSheet.create({
     },
     miniHash:{
         fontSize:moderateScale(12),
-        marginTop:height*0.015,
         marginLeft:width*0.03,
     },
     RectangleBoxNeTers:{
