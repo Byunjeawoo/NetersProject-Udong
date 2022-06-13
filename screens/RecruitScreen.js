@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
+import AppLoading from 'expo-app-loading';
 import { Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, TouchableOpacity, Text, View, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
@@ -18,39 +19,72 @@ function RecruitScreen({navigation}){
     const [selectedLanguage, setSelectedLanguage] = useState();
     const [clubIdList, setClubIdList] = useState([]);
     const [detailClubInfoList, setdetailClubInfoList] = useState([]);
-    var DetailClubInfo = [];
+    const [detailFinish, setDetailFinish] = useState(false);
+    const [isReady, setIsReady] = useState(false);
+    const onFinish = () => setIsReady(true);
+    const startLoading = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 500))
+    };
+    const nextId = useRef(0);
     useEffect(() => {
     axios.get(`${baseUrl}/clubs`).then((response) => {
         setClubIdList(response.data["body"]);
         });
     }, [])
     useEffect(()=> {
-    //console.log(clubIdList);
-    for(var i =0; i < clubIdList.length; i++){
-        axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
-            //var Id = {id : i};
-            //IdresConciseInfo = resConciseInfo.data["body"].assign(Id);
-            //setdetailClubInfoList(...detailClubInfoList,IdresConciseInfo);
-            //console.log(detailClubInfoList);
+        new Promise ((resolve, reject) => {
+            for(var i =0; i < clubIdList.length; i++){
+                axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
+                    const DetailClubInfoOne = {
+                        id : nextId.current,
+                        CurNumPeople : resConciseInfo.data["body"]["current_number_of_people"],
+                        HashTag : resConciseInfo.data["body"]["hashtag"],
+                        MaxNumPeople : resConciseInfo.data["body"]["maximum_number_of_people"],
+                        Name : resConciseInfo.data["body"]["name"]
+                    }
+                    console.log(DetailClubInfoOne);
+                    if(DetailClubInfoOne !== undefined){
+                        console.log(nextId.current)
+                        setdetailClubInfoList(detailClubInfoList.concat(DetailClubInfoOne))
+                        nextId.current += 1;
+                    }
+                })
+            }
+            resolve();
+        }).then(() =>  {
+            let items = Array.apply(null, Array(clubIdList.length)).map((curArray,i) => {
+                console.log(detailClubInfoList[i]);
+                return {
+                    CurNumPeople: detailClubInfoList[i]["CurNumPeople"],
+                    Hashtag: detailClubInfoList[i]["HashTag"],
+                    MaxNumPeople: detailClubInfoList[i]["MaxNumPeople"],
+                    Name: detailClubInfoList[i]["Name"],
+                    ClassId: clubIdList[i],
+                    id: i
+                    
+                };
+            });
+            console.log("RTTTTTTTTTTTTTTTTTTTT");
+            setDataSource(items);
+            setDetailFinish(true);
+        }).catch(() => {
+            console.log("Error");
         })
-    }
-    //console.log(items);
-    }, [clubIdList]);
-    
-    useEffect(() =>{
-        let items = Array.apply(null, Array(clubIdList.length)).map((v, i) => {
-            return {
-                CurNumPeople: 1,
-                Hashtag: ["Happy", "코딩", "연합동아리"],
-                MaxNumPeople: 12,
-                Name: "Neters",
-                id: 32023123,
-            };
-        });
-        setDataSource(items);
-    }, [clubIdList])   //ClubIdList -> detailClubInfoList
-    
 
+    }, [clubIdList]);
+    /*
+    useEffect(() =>{
+    }, [detailClubInfoList])   //ClubIdList -> detailClubInfoList
+    */
+    if (!isReady) {
+        return (
+            <AppLoading 
+                startAsync={startLoading}
+                onFinish={onFinish}
+                onError={console.error}
+            />
+        )
+    }
     return(
         <View style={{flex:1, backgroundColor:'white'}}>
             <View style={{flex:0.13, backgroundColor:"white", zIndex:6}}>
@@ -94,7 +128,7 @@ function RecruitScreen({navigation}){
                                 <View style={styles.imgNeTers}></View>
                                 <View style={styles.RectangleBoxNeTers}>
                                     <View style= {{flexDirection:'row'}}>
-                                        <Text style={styles.ClubName}>NETers</Text>
+                                        <Text style={styles.ClubName}>{item.Name}</Text>
                                         <View style= {{marginLeft:width*0.16, marginTop:height*0.02}}>
                                             <IconDetailPeople/>
                                             <Text style={{fontSize:moderateScale(9), marginLeft:-1*width*0.01, color:"#3D1F7D"}}>
