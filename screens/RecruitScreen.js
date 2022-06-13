@@ -16,22 +16,40 @@ function RecruitScreen({navigation}){
 
     const [dataSource, setDataSource] = useState([]);
     const [selectedLanguage, setSelectedLanguage] = useState();
+    const [clubIdList, setClubIdList] = useState([]);
+    const [detailClubInfoList, setdetailClubInfoList] = useState([]);
+    var DetailClubInfo = [];
     useEffect(() => {
     axios.get(`${baseUrl}/clubs`).then((response) => {
-        console.log(response.data);
+        setClubIdList(response.data["body"]);
         });
-
-
-    let items = Array.apply(null, Array(60)).map((v, i) => {
-        return {
-            id: i,
-            src: 'http://placehold.it/200x200?text=' + (i + 1)
-        };
-    });
-    setDataSource(items);
+    }, [])
+    useEffect(()=> {
+    //console.log(clubIdList);
+    for(var i =0; i < clubIdList.length; i++){
+        axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
+            //var Id = {id : i};
+            //IdresConciseInfo = resConciseInfo.data["body"].assign(Id);
+            //setdetailClubInfoList(...detailClubInfoList,IdresConciseInfo);
+            //console.log(detailClubInfoList);
+        })
+    }
     //console.log(items);
-    }, []);
-
+    }, [clubIdList]);
+    
+    useEffect(() =>{
+        let items = Array.apply(null, Array(clubIdList.length)).map((v, i) => {
+            return {
+                CurNumPeople: 1,
+                Hashtag: ["Happy", "코딩", "연합동아리"],
+                MaxNumPeople: 12,
+                Name: "Neters",
+                id: 32023123,
+            };
+        });
+        setDataSource(items);
+    }, [clubIdList])   //ClubIdList -> detailClubInfoList
+    
 
     return(
         <View style={{flex:1, backgroundColor:'white'}}>

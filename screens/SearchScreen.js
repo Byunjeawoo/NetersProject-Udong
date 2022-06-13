@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {Button, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, ScrollView} from 'react-native';
+import {Button, View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {IconNavSearch, IconNavProfile, IconNavAlert, IconNavGlass, IconNavHome} from '../util/svg';
-import { horizontalScale, moderateScale, verticalScale } from '../util/scailling';
 import { SearchBar } from 'react-native-screens';
 const { width, height } = Dimensions.get('window');
 
@@ -11,13 +10,12 @@ function SearchScreen({navigation}){
         <View style={{flex:1}}>
         <ScrollView scrollEnabled={false}>
             <View style={{flex:2, alignItems:'center'}}>
-
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={setText}
-                        value={text}
-                        placeholder="        검색어를 입력하세요."
-                    />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setText}
+                    value={text}
+                    placeholder="        검색어를 입력하세요."
+                />
             </View>
             <View></View>
             </ScrollView>

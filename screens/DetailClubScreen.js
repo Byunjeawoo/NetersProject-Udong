@@ -65,7 +65,7 @@ function DetailClubScreen({ navigation }) {
                     <View style={styles.boxAction}></View>
                 </ScrollView>
             </SafeAreaView>
-            <View style={{flexDirection:'row', height:height*0.1, justifyContent: 'center', backgroundColor:'white', borderTopWidth:1, borderColor:'#c8c8c8',}}>
+            <View style={{flexDirection:'row', height:height*0.1, justifyContent: 'center', backgroundColor:'white', borderTopWidth:1, borderColor:'#c8c8c8a'}}>
                 <TouchableOpacity style={styles.btnQuest}>
                     <Text style={{color:'black', fontSize:20}}>문의하기</Text>
                 </TouchableOpacity>
