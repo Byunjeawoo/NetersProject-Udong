@@ -14,7 +14,19 @@ const baseUrl = 'http://34.64.87.203:8000';
 // Passing configuration object to axios
 
 function RecruitScreen({navigation}){
-
+    const nextId = useRef(0);
+    const GetClubInfo = async (i) =>{
+        
+        await axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
+            const DetailClubInfoOne = {
+                id : i,
+                CurNumPeople : resConciseInfo.data["body"]["current_number_of_people"],
+                HashTag : resConciseInfo.data["body"]["hashtag"],
+                MaxNumPeople : resConciseInfo.data["body"]["maximum_number_of_people"],
+                Name : resConciseInfo.data["body"]["name"],
+            }
+            return DetailClubInfoOne
+        })}
     const [dataSource, setDataSource] = useState([]);
     const [selectedLanguage, setSelectedLanguage] = useState();
     const [clubIdList, setClubIdList] = useState([]);
@@ -25,53 +37,39 @@ function RecruitScreen({navigation}){
     const startLoading = async () => {
         await new Promise((resolve) => setTimeout(resolve, 500))
     };
-    const nextId = useRef(0);
+
     useEffect(() => {
     axios.get(`${baseUrl}/clubs`).then((response) => {
         setClubIdList(response.data["body"]);
-        });
+    });
+    setDetailFinish(true);
     }, [])
+
     useEffect(()=> {
-        new Promise ((resolve, reject) => {
-            for(var i =0; i < clubIdList.length; i++){
+        //setdetailClubInfoList([]);
+        async function test(){
+            let LenArray = Array.apply(null, Array(clubIdList.length)).map((v,i) => (i));
+            console.log(detailClubInfoList)
+            console.log("Start")
+            let arr = await Promise.all(LenArray.map((v, i) => 
                 axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
                     const DetailClubInfoOne = {
-                        id : nextId.current,
+                        id : i,
                         CurNumPeople : resConciseInfo.data["body"]["current_number_of_people"],
                         HashTag : resConciseInfo.data["body"]["hashtag"],
                         MaxNumPeople : resConciseInfo.data["body"]["maximum_number_of_people"],
-                        Name : resConciseInfo.data["body"]["name"]
+                        Name : resConciseInfo.data["body"]["name"],
                     }
-                    console.log(DetailClubInfoOne);
-                    if(DetailClubInfoOne !== undefined){
-                        console.log(nextId.current)
-                        setdetailClubInfoList(detailClubInfoList.concat(DetailClubInfoOne))
-                        nextId.current += 1;
-                    }
+                    console.log(DetailClubInfoOne)
+                    return DetailClubInfoOne
                 })
-            }
-            resolve();
-        }).then(() =>  {
-            let items = Array.apply(null, Array(clubIdList.length)).map((curArray,i) => {
-                console.log(detailClubInfoList[i]);
-                return {
-                    CurNumPeople: detailClubInfoList[i]["CurNumPeople"],
-                    Hashtag: detailClubInfoList[i]["HashTag"],
-                    MaxNumPeople: detailClubInfoList[i]["MaxNumPeople"],
-                    Name: detailClubInfoList[i]["Name"],
-                    ClassId: clubIdList[i],
-                    id: i
-                    
-                };
-            });
-            console.log("RTTTTTTTTTTTTTTTTTTTT");
-            setDataSource(items);
-            setDetailFinish(true);
-        }).catch(() => {
-            console.log("Error");
-        })
-
-    }, [clubIdList]);
+            
+            ))
+                    //setdetailClubInfoList(detailClubInfoList.concat(v))
+            console.log('arr'+JSON.stringify(arr))
+        }
+        test()
+    }, [detailFinish]);
     /*
     useEffect(() =>{
     }, [detailClubInfoList])   //ClubIdList -> detailClubInfoList
@@ -122,7 +120,7 @@ function RecruitScreen({navigation}){
                 <SafeAreaView style={styles.container}>
                     <FlatList
                         key={'#'}
-                        data={dataSource}
+                        data={detailClubInfoList}
                         renderItem={({item}) => (
                             <TouchableOpacity style={styles.itemList} onPress={() => navigation.navigate('DetailClub')}>
                                 <View style={styles.imgNeTers}></View>
