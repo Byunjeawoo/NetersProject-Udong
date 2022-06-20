@@ -27,6 +27,33 @@ function RecruitScreen({navigation}){
             }
             return DetailClubInfoOne
         })}
+
+    async function test(){
+        let LenArray = Array.apply(null, Array(clubIdList.length)).map((v,i) => (i));
+        console.log(detailClubInfoList)
+        console.log("Start")
+        let arr = await Promise.all(LenArray.map((v, i) => 
+            axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
+                const DetailClubInfoOne = {
+                    id : i,
+                    CurNumPeople : resConciseInfo.data["body"]["current_number_of_people"],
+                    HashTag : resConciseInfo.data["body"]["hashtag"],
+                    MaxNumPeople : resConciseInfo.data["body"]["maximum_number_of_people"],
+                    Name : resConciseInfo.data["body"]["name"],
+                }
+                console.log(DetailClubInfoOne)
+                return DetailClubInfoOne
+            })
+        ))}
+    async function getClubIdListAndMakeFlatItem(){
+        await axios.get(`${baseUrl}/clubs`).then((response) => {
+            setClubIdList(response.data["body"]);
+        });
+        console.log("getClubId Finish")
+        console.log(clubIdList)
+        await test()
+        setIsReady(true)
+        }
     const [dataSource, setDataSource] = useState([]);
     const [selectedLanguage, setSelectedLanguage] = useState();
     const [clubIdList, setClubIdList] = useState([]);
@@ -39,37 +66,9 @@ function RecruitScreen({navigation}){
     };
 
     useEffect(() => {
-    axios.get(`${baseUrl}/clubs`).then((response) => {
-        setClubIdList(response.data["body"]);
-    });
-    setDetailFinish(true);
+    //getClubIdListAndMakeFlatItem()
     }, [])
 
-    useEffect(()=> {
-        //setdetailClubInfoList([]);
-        async function test(){
-            let LenArray = Array.apply(null, Array(clubIdList.length)).map((v,i) => (i));
-            console.log(detailClubInfoList)
-            console.log("Start")
-            let arr = await Promise.all(LenArray.map((v, i) => 
-                axios.get(`${baseUrl}/clubs/${clubIdList[i]}/concise_info`).then((resConciseInfo) =>{
-                    const DetailClubInfoOne = {
-                        id : i,
-                        CurNumPeople : resConciseInfo.data["body"]["current_number_of_people"],
-                        HashTag : resConciseInfo.data["body"]["hashtag"],
-                        MaxNumPeople : resConciseInfo.data["body"]["maximum_number_of_people"],
-                        Name : resConciseInfo.data["body"]["name"],
-                    }
-                    console.log(DetailClubInfoOne)
-                    return DetailClubInfoOne
-                })
-            
-            ))
-                    //setdetailClubInfoList(detailClubInfoList.concat(v))
-            console.log('arr'+JSON.stringify(arr))
-        }
-        test()
-    }, [detailFinish]);
     /*
     useEffect(() =>{
     }, [detailClubInfoList])   //ClubIdList -> detailClubInfoList
@@ -77,7 +76,7 @@ function RecruitScreen({navigation}){
     if (!isReady) {
         return (
             <AppLoading 
-                startAsync={startLoading}
+                startAsync={getClubIdListAndMakeFlatItem}
                 onFinish={onFinish}
                 onError={console.error}
             />
